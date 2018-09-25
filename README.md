@@ -28,13 +28,12 @@ Or install it yourself as:
 >> require 'memair'
 => True
 
-
->> require 'memair'
-=> true
 >> access_token = "0" * 64 # Otto is Memair's sandbox user
 => "0000000000000000000000000000000000000000000000000000000000000000"
+
 >> user = Memair.new(access_token)
 => #<Memair:0x00007f8a3fa657e0 @access_token="0000000000000000000000000000000000000000000000000000000000000000">
+
 >> query = """
     query get_user_details {
         UserDetails {
@@ -43,6 +42,7 @@ Or install it yourself as:
     }
 """
 => "\nquery get_user_details {\n  UserDetails {\n    email\n  }\n}\n"
+
 >>  response = user.query(query)
 => {"data"=>{"UserDetails"=>[{"email"=>"otto@memair.com"}]}}
 ```
