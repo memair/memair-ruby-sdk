@@ -78,6 +78,6 @@ class MemairTest < Minitest::Test
     """
     response = user.query(query)
 
-    assert_equal( "otto@memair.com", response["data"]["UserDetails"].first["email"] )
+    assert_equal( "otto@memair.com", response["data"]["UserDetails"]["email"] )
   end
 end
