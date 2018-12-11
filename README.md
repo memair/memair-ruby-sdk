@@ -44,5 +44,5 @@ Or install it yourself as:
 => "\nquery get_user_details {\n  UserDetails {\n    email\n  }\n}\n"
 
 >>  response = user.query(query)
-=> {"data"=>{"UserDetails"=>[{"email"=>"otto@memair.com"}]}}
+=> {"data"=>{"UserDetails"=>{"email"=>"otto@memair.com"}}}
 ```
