@@ -3,11 +3,13 @@ require 'memair'
 
 class MemairTest < Minitest::Test
   def setup
-    @valid_access_token = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    @valid_hex_access_token = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    @valid_base64_access_token = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFG'
   end
 
   def test_no_errors_with_valid_access_token
-    Memair.new(@valid_access_token)
+    Memair.new(@valid_hex_access_token)
+    Memair.new(@valid_base64_access_token)
   end
 
   def test_raises_error_on_missing_access_token
@@ -25,20 +27,12 @@ class MemairTest < Minitest::Test
     assert_equal( 'access_token is not a string.', exception.message )
   end
 
-  def test_raises_error_on_non_hex_access_token
-    non_hex_access_token = 'foobarbaz'
-    exception = assert_raises(KeyError) {
-      Memair.new(non_hex_access_token)
-    }
-    assert_equal( 'access_token not valid hexstring.', exception.message )
-  end
-
   def test_raises_error_on_short_access_token
     short_access_token = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde'
     exception = assert_raises(KeyError) {
       Memair.new(short_access_token)
     }
-    assert_equal( 'access_token is not 64 characters.', exception.message )
+    assert_equal( 'access_token should be a 43 character base64 string or a 64 character hex string.', exception.message )
   end
 
   def test_raises_error_on_long_access_token
@@ -46,11 +40,11 @@ class MemairTest < Minitest::Test
     exception = assert_raises(KeyError) {
       Memair.new(long_access_token)
     }
-    assert_equal( 'access_token is not 64 characters.', exception.message )
+    assert_equal( 'access_token should be a 43 character base64 string or a 64 character hex string.', exception.message )
   end
 
   def test_raises_error_when_query_missing
-    user = Memair.new(@valid_access_token)
+    user = Memair.new(@valid_hex_access_token)
     exception = assert_raises(ArgumentError) {
       user.query()
     }
@@ -58,7 +52,7 @@ class MemairTest < Minitest::Test
   end
 
   def test_raises_error_when_query_not_string
-    user = Memair.new(@valid_access_token)
+    user = Memair.new(@valid_hex_access_token)
     non_string_query = 123
     exception = assert_raises(KeyError) {
       user.query(non_string_query)

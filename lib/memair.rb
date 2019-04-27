@@ -22,7 +22,6 @@ class Memair
   private
     def validate(access_token)
       raise KeyError, "access_token is not a string." unless access_token.is_a? String
-      raise KeyError, "access_token not valid hexstring." if access_token[/\H/]
-      raise KeyError, "access_token is not 64 characters." unless access_token.length == 64
+      raise KeyError, "access_token should be a 43 character base64 string or a 64 character hex string." unless [64, 43].include?(access_token.length)
     end
 end
