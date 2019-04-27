@@ -3,7 +3,7 @@ require 'httparty'
 class Memair
   def initialize(access_token)
     validate(access_token)
-    @access_token = access_token.downcase
+    @access_token = access_token
   end
 
   def query(query)
