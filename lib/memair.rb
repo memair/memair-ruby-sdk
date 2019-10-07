@@ -11,7 +11,7 @@ class Memair
     attempts = 0
     begin
       sleep(attempts * 2)
-      response = HTTParty.post("https://memair.com/graphql", body: query, headers: {access_token: @access_token}, timeout: 180)
+      response = HTTParty.post("https://memair.com/graphql", body: {query: query, access_token: @access_token}.to_json, headers: { 'Content-Type': 'application/json' }, timeout: 180)
     rescue
       retry if (attempts += 1) < 8
       raise StandardError, "Can not connect to Memair"
