@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'memair'
-  s.version     = '0.1.2'
-  s.date        = '2019-10-06'
+  s.version     = '0.1.3'
+  s.date        = '2019-10-07'
   s.summary     = 'An SDK for Memair'
   s.description = 'An SDK for Memair allowing easy querying of the GraphQL API'
   s.authors     = ['Greg Clarke']
